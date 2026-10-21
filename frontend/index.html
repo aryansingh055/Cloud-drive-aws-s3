@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloud Drive — Your personal cloud</title>
+  <meta name="description" content="A personal cloud workspace powered by Amazon S3." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="auth-gate auth-page">
+    <div class="auth-layout">
+      <section class="auth-intro">
+        <a class="auth-brand auth-brand-link" href="./index.html" aria-label="Cloud Drive home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none"><rect x="4" y="4" width="40" height="40" rx="13" fill="url(#authG)"/><path d="M15 28.5a7 7 0 0 1 2.9-13.37A9.1 9.1 0 0 1 35.1 19a6 6 0 0 1-1.1 11.9H26v-7.3l2.55 2.55 2.1-2.1L24 17.4l-6.65 6.65 2.1 2.1L22 23.6v7.3h-7Z" fill="white"/><defs><linearGradient id="authG" x1="8" y1="7" x2="40" y2="42" gradientUnits="userSpaceOnUse"><stop stop-color="#7C6CFF"/><stop offset="1" stop-color="#4F46E5"/></linearGradient></defs></svg>
+          </span>
+          <span><strong>Cloud Drive</strong><em>POWERED BY AWS S3</em></span>
+        </a>
+        <div class="auth-intro-copy">
+          <div class="eyebrow">YOUR PERSONAL CLOUD</div>
+          <h1>Your files.<br><span>Your space.</span></h1>
+          <p>A private workspace to organize and manage files stored in your own Amazon S3 bucket.</p>
+          <div class="auth-feature-list">
+            <div><span class="auth-feature-icon">↥</span><span><strong>Simple file management</strong><small>Upload, organize and download files.</small></span></div>
+            <div><span class="auth-feature-icon">⌁</span><span><strong>Your own S3 storage</strong><small>Your files stay in your private bucket.</small></span></div>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="auth-card auth-card-side" aria-labelledby="authTitle">
+        <div class="auth-copy auth-copy-side">
+          <div class="eyebrow" id="authEyebrow">WELCOME BACK</div>
+          <h2 id="authTitle">Sign in to Cloud Drive</h2>
+          <p id="authSubtitle">Access your personal cloud workspace.</p>
+        </div>
+        <div class="auth-tabs" role="tablist" aria-label="Authentication">
+          <button class="auth-tab active" id="loginTab" type="button" role="tab" aria-selected="true">Login</button>
+          <button class="auth-tab" id="registerTab" type="button" role="tab" aria-selected="false">Register</button>
+        </div>
+        <button class="google-btn" id="googleBtn" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M21.35 12.23c0-.71-.06-1.39-.18-2.05H12v3.88h5.24a4.48 4.48 0 0 1-1.94 2.94v2.43h3.14c1.84-1.69 2.91-4.18 2.91-7.2Z"/><path fill="#34A853" d="M12 21.6c2.63 0 4.84-.87 6.45-2.36l-3.14-2.43c-.87.58-1.98.93-3.31.93-2.54 0-4.69-1.71-5.46-4.01H3.29v2.51A9.74 9.74 0 0 0 12 21.6Z"/><path fill="#FBBC05" d="M6.54 13.73A5.86 5.86 0 0 1 6.23 12c0-.6.1-1.18.31-1.73V7.76H3.29A9.6 9.6 0 0 0 2.25 12c0 1.54.37 2.99 1.04 4.24l3.25-2.51Z"/><path fill="#EA4335" d="M12 6.26c1.43 0 2.71.49 3.72 1.47l2.79-2.79C16.84 3.35 14.63 2.4 12 2.4a9.74 9.74 0 0 0-8.71 5.36l3.25 2.51c.77-2.3 2.92-4.01 5.46-4.01Z"/></svg>
+          Continue with Google
+        </button>
+        <div class="auth-divider"><span>or continue with email</span></div>
+        <form id="authForm" class="auth-form">
+          <label class="auth-field" id="nameField" hidden>
+            <span>Full name</span>
+            <input id="authName" type="text" autocomplete="name" placeholder="Your name" />
+          </label>
+          <label class="auth-field">
+            <span>Email address</span>
+            <input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com" required />
+          </label>
+          <label class="auth-field">
+            <span>Password</span>
+            <span class="password-wrap"><input id="authPassword" type="password" autocomplete="current-password" placeholder="Enter your password" minlength="6" required /><button type="button" id="passwordToggle" aria-label="Show password">Show</button></span>
+          </label>
+          <label class="auth-field" id="confirmField" hidden>
+            <span>Confirm password</span>
+            <input id="authConfirm" type="password" autocomplete="new-password" placeholder="Re-enter your password" minlength="6" />
+          </label>
+          <button class="primary-btn auth-submit" id="authSubmit" type="submit">Sign in</button>
+        </form>
+        <div class="auth-message" id="authMessage" role="status" aria-live="polite" hidden></div>
+        <p class="auth-security"><span>●</span> AWS credentials are kept on the server.</p>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4"></script>
+  <script src="./supabase-config.js"></script>
+  <script src="./supabase-client.js"></script>
+  <script src="./auth.js"></script>
+</body>
+</html>

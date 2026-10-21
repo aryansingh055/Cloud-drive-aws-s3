@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Cloud Drive</title>
+  <meta name="description" content="Manage your personal cloud files with Cloud Drive, powered by Amazon S3." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="dashboard-auth-loading" id="dashboardLoading" role="status" aria-live="polite">
+    <div class="loading-mark">☁</div>
+    <h1 id="dashboardLoadingTitle">Checking your sign-in…</h1>
+    <p id="dashboardLoadingText">Please wait while Cloud Drive verifies your session.</p>
+    <a class="primary-btn loading-login-link" id="dashboardLoginLink" href="./index.html">Go to login</a>
+  </main>
+  <div class="app-shell" id="appShell" hidden>
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none"><rect x="4" y="4" width="40" height="40" rx="13" fill="url(#g)"/><path d="M15 28.5a7 7 0 0 1 2.9-13.37A9.1 9.1 0 0 1 35.1 19a6 6 0 0 1-1.1 11.9H26v-7.3l2.55 2.55 2.1-2.1L24 17.4l-6.65 6.65 2.1 2.1L22 23.6v7.3h-7Z" fill="white"/><defs><linearGradient id="g" x1="8" y1="7" x2="40" y2="42" gradientUnits="userSpaceOnUse"><stop stop-color="#7C6CFF"/><stop offset="1" stop-color="#4F46E5"/></linearGradient></defs></svg>
+        </div>
+        <div>
+          <div class="brand-name">Cloud Drive</div>
+          <div class="brand-sub">POWERED BY AWS S3</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <div class="nav-label">WORKSPACE</div>
+        <button class="nav-item active" data-view="all"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg></span>Overview</button>
+        <button class="nav-item" data-view="all"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4M9 12h6M9 15.5h6"/></svg></span>All Files</button>
+        <button class="nav-item" data-view="images"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="m4 17 5-5 3.5 3 2.5-2.5L20 17"/></svg></span>Images</button>
+        <button class="nav-item" data-view="documents"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4M9 12h6M9 15.5h6M9 18h4"/></svg></span>Documents</button>
+        <button class="nav-item" data-view="media"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3z"/></svg></span>Media</button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="plan-card">
+          <div class="plan-top"><span>Storage</span><strong id="sidebarStorage">0 / 1 GB</strong></div>
+          <div class="progress"><div id="sidebarProgress"></div></div>
+          <p>Connect your S3 bucket to start storing files.</p>
+          <button class="text-button" id="setupBtn">Storage setup <span>→</span></button>
+        </div>
+        <button class="nav-item settings" id="settingsBtn"><span class="nav-icon">⚙</span>Settings</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">PERSONAL CLOUD</div>
+          <h1>Keep your workspace moving <span>✦</span></h1>
+          <p class="subtitle">A clean workspace for your files, built around Amazon S3.</p>
+        </div>
+        <div class="top-actions">
+          <button class="icon-btn" id="notificationsBtn" title="Notifications" aria-label="Notifications">⌁<span class="notif"></span></button>
+          <button class="connection" id="connectionBadge">
+            <span class="status-dot"></span>
+            <span id="connectionText" aria-live="polite">Not Connected to Your Bucket</span>
+          </button>
+        </div>
+      </header>
+
+      <section class="hero-grid">
+        <div class="hero-card">
+          <div class="hero-copy">
+            <div class="mini-pill"><span class="spark">✦</span> S3 STORAGE WORKSPACE</div>
+            <h2>Your files,<br><span>organized in one place.</span></h2>
+            <p>Upload, browse, download and manage your cloud files from a single focused dashboard.</p>
+            <div class="hero-actions">
+              <button class="primary-btn" id="heroUpload">＋ Upload files</button>
+              <button class="ghost-btn" id="learnBtn">How it works <span>↗</span></button>
+            </div>
+          </div>
+          <div class="orbital" aria-hidden="true">
+            <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div>
+            <div class="core"><span>☁</span></div>
+            <div class="floating-chip chip-a">S3</div>
+            <div class="floating-chip chip-b">SECURE</div>
+            <div class="floating-chip chip-c">PRIVATE</div>
+          </div>
+        </div>
+
+        <div class="storage-card">
+          <div class="card-heading"><span>Storage overview</span><button class="dots" id="storageMenuBtn" title="Storage options" aria-label="Storage options">•••</button></div>
+          <div class="storage-number"><strong id="fileCount">0</strong><span>files</span></div>
+          <div class="storage-bar"><div id="storageFill"></div></div>
+          <div class="storage-meta"><span id="usedText">0 Bytes used</span><span id="quotaText">1 GB quota</span></div>
+          <div class="storage-breakdown">
+            <div><span class="legend-dot image"></span>Images <strong id="imageCount">0</strong></div>
+            <div><span class="legend-dot doc"></span>Documents <strong id="docCount">0</strong></div>
+            <div><span class="legend-dot media"></span>Media <strong id="mediaCount">0</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="workspace-card">
+        <div class="workspace-header">
+          <div>
+            <div class="section-kicker">YOUR WORKSPACE</div>
+            <h2>My Files <span class="count-badge" id="headerCount">0</span></h2>
+          </div>
+          <div class="workspace-tools">
+            <label class="search">
+              <span aria-hidden="true">⌕</span><input id="searchInput" type="search" aria-label="Search files" placeholder="Search files..." />
+            </label>
+            <button class="bulk-delete-btn" id="deleteSelectedBtn" type="button" hidden disabled>Delete selected (0)</button>
+            <button class="filter-btn" id="sortBtn">Recent <span>⌄</span></button>
+            <button class="primary-btn compact" id="uploadBtn">＋ Upload</button>
+          </div>
+        </div>
+
+        <div class="tabs" id="tabs">
+          <button class="tab active" data-filter="all">All <span>0</span></button>
+          <button class="tab" data-filter="images">Images <span>0</span></button>
+          <button class="tab" data-filter="documents">Documents <span>0</span></button>
+          <button class="tab" data-filter="media">Media <span>0</span></button>
+        </div>
+
+        <div class="drop-zone" id="dropZone">
+          <div class="drop-icon">↑</div>
+          <div><strong>Drag & drop files here</strong><span>or browse from your device</span></div>
+          <button class="outline-btn" id="browseBtn">Browse files</button>
+        </div>
+
+        <input id="fileInput" type="file" multiple hidden />
+
+        <div class="file-table-wrap">
+          <table class="file-table">
+            <thead><tr><th class="select-col"><input id="selectAllFiles" class="file-select-checkbox select-all-files" type="checkbox" aria-label="Select all visible files" /></th><th>Name</th><th>Type</th><th>Size</th><th>Added</th><th></th></tr></thead>
+            <tbody id="fileList"></tbody>
+          </table>
+          <div class="empty-state" id="emptyState">
+            <div class="empty-illustration"><span>☁</span></div>
+            <h3>No files in this view</h3>
+            <p>Upload a file to see it appear here. Once your S3 bucket is connected, files are stored and managed directly in your bucket.</p>
+            <button class="outline-btn" id="emptyUpload">Choose a file</button>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span>Cloud Drive <b>•</b> Prototype</span>
+        <span>Designed for Amazon S3 integration <b>•</b> <button id="setupFooter">Storage setup</button></span>
+      </footer>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"><span class="toast-icon">i</span><div><strong id="toastTitle">Storage not connected</strong><p id="toastMessage">Connect your S3 backend before uploading.</p></div><button id="toastClose">×</button></div>
+
+  <div class="modal-backdrop" id="settingsBackdrop" hidden>
+    <div class="modal settings-modal">
+      <button class="modal-close" id="settingsClose">×</button>
+      <div class="modal-icon">⚙</div>
+      <div class="eyebrow">PREFERENCES</div>
+      <h2>Settings</h2>
+      <p>Choose how Cloud Drive should look and find the setup information when you need it.</p>
+
+      <div class="settings-section">
+        <div class="settings-row">
+          <div>
+            <strong>Appearance</strong>
+            <span>Switch between a dark or light workspace.</span>
+          </div>
+          <div class="theme-switcher">
+            <button class="theme-choice active" data-theme="dark" aria-pressed="true">☾ Dark</button>
+            <button class="theme-choice" data-theme="light" aria-pressed="false">☀ Light</button>
+          </div>
+        </div>
+
+        <button class="settings-link" id="howConnectBtn">
+          <span class="settings-link-icon">↗</span>
+          <span><strong>How to connect your S3 bucket</strong><small>Setup guide for the AWS storage backend</small></span>
+          <span class="arrow">→</span>
+        </button>
+
+        <button class="settings-link" id="logoutSettingsBtn">
+          <span class="settings-link-icon">↪</span>
+          <span><strong>Sign out</strong><small>End your current Cloud Drive session</small></span>
+          <span class="arrow">→</span>
+        </button>
+
+        <button class="settings-link" id="aboutBtn">
+          <span class="settings-link-icon">⌘</span>
+          <span><strong>Developer & Project</strong><small>Project overview and developer contact</small></span>
+          <span class="arrow">→</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="aboutBackdrop" hidden>
+    <div class="modal developer-modal">
+      <button class="modal-close" id="aboutClose">×</button>
+      <div class="modal-icon">⌘</div>
+      <div class="eyebrow">DEVELOPER & PROJECT</div>
+      <h2>Cloud Drive</h2>
+      <p>Cloud Drive is a personal cloud workspace built around Amazon S3. You can connect your own private S3 bucket and use the dashboard to upload, browse, download and manage your personal files from one focused workspace.</p>
+
+      <div class="about-card project-card">
+        <span>ABOUT THE PROJECT</span>
+        <strong>Personal Cloud Storage with Amazon S3</strong>
+        <p>Connect your own bucket, keep your data in your S3 storage, and manage it through a clean web dashboard. The frontend talks to a Node.js API, while AWS credentials remain on the server.</p>
+      </div>
+
+      <div class="about-card developer-details">
+        <span>DEVELOPED BY</span>
+        <strong>Aryan Singh</strong>
+        <a href="mailto:aryansinghas7703@gmail.com">✉ aryansinghas7703@gmail.com</a>
+        <a href="https://www.linkedin.com/in/aryan-singh-615a44369" target="_blank" rel="noreferrer">in LinkedIn ↗</a>
+        <a href="https://github.com/aryansingh055" target="_blank" rel="noreferrer">⌘ GitHub ↗</a>
+      </div>
+
+      <div class="about-card">
+        <span>SOURCE CODE</span>
+        <strong>Cloud Drive — Powered by AWS S3</strong>
+        <a id="githubLink" href="https://github.com/aryansingh055" target="_blank" rel="noreferrer">GitHub profile ↗</a>
+      </div>
+      <div class="modal-actions"><button class="primary-btn" id="aboutDone">Done</button></div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" hidden>
+    <div class="modal">
+      <button class="modal-close" id="modalClose">×</button>
+      <div class="modal-icon">☁</div>
+      <div class="eyebrow">AWS S3 CONNECTION</div>
+      <h2 id="connectionModalTitle">Connect your storage</h2>
+      <p id="connectionModalText">Your S3 storage is not connected right now. This guide explains the setup; the actual credentials will stay on the server side and will never be placed in the browser.</p>
+      <div class="setup-list">
+        <div><span>01</span><p>Create a private S3 bucket</p></div>
+        <div><span>02</span><p>Configure restricted IAM permissions</p></div>
+        <div><span>03</span><p>Add backend environment variables</p></div>
+        <div><span>04</span><p>Start the API and test real uploads</p></div>
+      </div>
+      <div class="modal-actions"><button class="primary-btn" id="modalDone">Got it</button><button class="ghost-btn" id="modalGuide">View README</button></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4"></script>
+  <script src="./supabase-config.js"></script>
+  <script src="./app-config.js"></script>
+  <script src="./supabase-client.js"></script>
+  <script src="./app.js"></script>
+  <script>
+    // Separate-script watchdog still runs if a previous dashboard script fails to parse.
+    window.setTimeout(() => {
+      const loading = document.getElementById("dashboardLoading");
+      if (!loading || loading.hidden) return;
+      const title = document.getElementById("dashboardLoadingTitle");
+      const message = document.getElementById("dashboardLoadingText");
+      if (title && title.textContent === "Checking your sign-in…") title.textContent = "Dashboard startup did not finish";
+      if (message && message.textContent.includes("Please wait while Cloud Drive verifies your session.")) {
+        message.textContent = "Refresh once. If this screen remains, open F12 → Console and check the first red error message.";
+      }
+    }, 12000);
+  </script>
+</body>
+</html>
