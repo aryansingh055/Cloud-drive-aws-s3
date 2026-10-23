@@ -346,6 +346,3 @@ The backend derives the authenticated user's ID from the verified session instea
 
 ---
 
-<p align="center">
-  Built to explore web development, authentication, and secure cloud file storage with AWS.
-</p>
