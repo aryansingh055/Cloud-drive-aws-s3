@@ -1,214 +1,340 @@
 
-# ☁️ Cloud Drive — Powered by AWS S3
+# ☁️ Cloud Drive — Powered by Amazon S3
 
-A modern personal cloud storage project designed to provide a simple and intuitive workspace for managing files using Amazon S3.
+A personal cloud storage web application built with **HTML, CSS, JavaScript, Node.js, Express, Amazon S3, and Supabase Authentication**.
+
+Cloud Drive provides a modern dashboard for uploading, viewing, searching, downloading, renaming, and deleting files stored in a private Amazon S3 bucket.
 
 <p align="center">
   <a href="https://cloud-drive-s3.vercel.app">
-    <img src="https://img.shields.io/badge/Live%20Demo-Open%20Cloud%20Drive-6366f1?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo"/>
+    <img src="https://img.shields.io/badge/Live%20Demo-Open%20Dashboard-6366f1?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo"/>
   </a>
   <a href="https://github.com/aryansingh055/cloud-drive-aws-s3">
-    <img src="https://img.shields.io/badge/GitHub-Source%20Code-181717?style=for-the-badge&logo=github" alt="GitHub Repository"/>
+    <img src="https://img.shields.io/badge/GitHub-Source%20Code-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Repository"/>
   </a>
 </p>
 
 ---
 
-## 📌 About the Project
+## 📌 Project Overview
 
-Cloud Drive is a web-based project that explores how modern web technologies can be used to create a personal file management workspace with Amazon S3 as the intended cloud storage service.
+Cloud Drive is a web-based file management application that uses Amazon S3 as its cloud storage layer.
 
-The application features a dashboard-style interface for accessing file categories and storage-related information. The project separates the live frontend demonstration from the main source code and configuration documentation.
+Users can create an account, sign in, and access a dashboard to manage their files. Supabase handles authentication, while a Node.js and Express backend verifies user sessions and communicates with Amazon S3.
 
-**Project Highlights**
-- Modern cloud storage dashboard
-- File management interface
-- AWS S3-based storage architecture
-- Web-based frontend
-- Live demo deployment on Vercel
-- Source code and documentation on GitHub
+Each user's files are organized under a user-specific S3 prefix, helping separate file access between authenticated users.
 
-> **Note:** The live demo showcases the website interface. Real authentication and file storage depend on the services configured in the application.
+### 🎯 Project Goals
+
+- Build a practical cloud storage application.
+- Integrate Amazon S3 for private file storage.
+- Implement authentication using Supabase Auth.
+- Develop a backend API using Node.js and Express.
+- Practice secure credential management and cloud deployment.
+- Provide clear setup instructions so other developers can configure their own AWS and Supabase projects.
 
 ## 🚀 Live Demo
 
-**[Open Cloud Drive →](https://cloud-drive-s3.vercel.app)**
+**[Open the Cloud Drive Dashboard →](https://cloud-drive-s3.vercel.app)**
 
-The live demo allows visitors to explore the deployed interface without setting up the project locally.
+The public demo showcases the dashboard interface.
+
+**Important:** This is a UI demonstration. Real authentication and S3 file operations in the complete application require a configured Supabase project, backend API, and AWS S3 bucket.
 
 ## ✨ Features
 
-- ☁️ **Cloud Storage Concept** — Designed around Amazon S3 object storage.
-- 📊 **Dashboard Interface** — A centralized workspace for file-related information.
-- 📁 **File Categories** — Dedicated views for all files, images, documents, and media.
-- ⬆️ **Upload Interface** — User interface for selecting and uploading files.
-- 🗂️ **File Management** — Interface designed for common file operations.
-- 🎨 **Modern UI** — A dashboard-focused layout with a consistent visual theme.
-- 🌐 **Live Deployment** — Public frontend demo hosted on Vercel.
-- 📖 **Documentation** — Setup and configuration guidance for developers.
+- 🔐 **User Authentication** — Email and password sign-up and sign-in through Supabase Auth.
+- ☁️ **Amazon S3 Storage** — Uses your own private S3 bucket.
+- 📤 **File Upload** — Upload files using a file picker or drag-and-drop.
+- 📥 **Secure Downloads** — Generates short-lived presigned URLs.
+- 👁️ **File Preview** — Previews supported file types such as images, PDFs, text files, CSV/JSON, audio, and video.
+- 🔎 **Search and Sort** — Find and organize files.
+- 📁 **File Categories** — Browse files by category.
+- ✏️ **Rename Files** — Rename files stored in S3.
+- 🗑️ **Delete Files** — Delete individual files or select multiple files for bulk deletion.
+- 🌗 **Dark and Light Themes** — Switch between dashboard themes.
+- 📊 **Storage Status** — Check whether the configured S3 bucket is reachable.
+- 🛡️ **User-Scoped Storage** — Organizes files under the authenticated user's S3 prefix.
 
-*Feature availability depends on the functionality implemented and configured in the current source code.*
+Feature availability depends on the correct configuration of the frontend, backend, Supabase, and AWS permissions.
 
-## 🛠️ Tech Stack
+## 🛠️ Technology Stack
 
 | Technology | Purpose |
 |---|---|
-| HTML5 | Page structure |
-| CSS3 | Styling and layout |
-| JavaScript | Client-side interactions |
-| Amazon S3 | Cloud object storage |
-| Vercel | Frontend demo hosting |
-| Git | Version control |
-| GitHub | Source code hosting |
+| HTML5 | Frontend structure |
+| CSS3 | Styling and responsive layout |
+| JavaScript | Frontend interactions and API requests |
+| Node.js | Backend runtime |
+| Express.js | Backend REST API |
+| Amazon S3 | Cloud file storage |
+| AWS SDK for JavaScript v3 | Communication with S3 |
+| AWS IAM | Access control and permissions |
+| Supabase Auth | User authentication |
+| Git and GitHub | Version control and source code |
 
-Additional backend or authentication technologies should be listed here if they are part of the current implementation.
-
-## 🏗️ Architecture
-
-The intended high-level architecture is:
-
-```text
-                 User
-                   |
-                   v
-          Cloud Drive Frontend
-                   |
-                   v
-              Backend / API
-                   |
-                   v
-              Amazon S3
-            Object Storage
-```
-
-### Components
-
-- **Frontend:** Provides the dashboard and user interface.
-- **Backend / API:** Handles authorized file operations when implemented.
-- **Amazon S3:** Stores files as objects in an S3 bucket.
-- **Vercel:** Hosts the public frontend demonstration.
-
-The diagram describes the intended storage architecture. Actual request flows should match the backend and frontend implementation in the repository.
-
-## 📂 Project Structure
-
-The demo frontend contains files similar to the following:
+## 🏗️ System Architecture
 
 ```text
-Deploy V2/
-├── index.html
-├── dashboard.html
-├── styles.css
-├── app.js
-├── app-config.js
-├── auth.js
-├── supabase-client.js
-├── supabase-config.js
-├── vercel.json
-├── DEPLOY.md
-└── VERIFICATION-REPORT.md
+                  User
+                   |
+                   v
+                Frontend
+       HTML, CSS and JavaScript
+                   |
+                   | Supabase session token
+                   v
+           Backend — Express
+          Node.js REST API
+             /         \
+            v           v
+       Supabase       Amazon S3
+       Auth           Private Bucket
+     Verification     File Storage
 ```
 
-This is the demo folder structure, not necessarily the exact structure of the main repository. Update it to match the files committed to GitHub.
+### How It Works
 
-## ⚙️ Getting Started
+1. The user registers or signs in through the frontend using Supabase Auth.
+2. The frontend obtains the user's authentication session.
+3. Protected API requests send the access token to the Express backend.
+4. The backend verifies the token with Supabase before allowing file operations.
+5. The backend accesses the configured S3 bucket using server-side AWS credentials.
+6. Files are stored under a prefix associated with the authenticated user's ID.
+7. The backend returns file information or short-lived presigned URLs when required.
 
-### Prerequisites
+Supabase is used for authentication, not as the file storage service. Amazon S3 stores the actual file objects.
 
-- Git
-- A modern web browser
-- Node.js and npm if required by the project scripts or backend
-- An AWS account and S3 bucket for real cloud storage functionality
+---
 
-### 1. Clone the Repository
+# ⚙️ Run the Project Locally
+
+Follow these steps to run your own instance.
+
+## Step 1 — Clone the Repository
+
+Open a terminal and run:
 
 ```bash
 git clone https://github.com/aryansingh055/cloud-drive-aws-s3.git
-cd cloud-drive-aws-s3
+
+cd Cloud-drive-aws-s3
 ```
 
-### 2. Review the Project Files
+Open the cloned project folder in VS Code.
 
-Check the repository structure, package files, environment examples, and any setup documentation to identify the required frontend and backend commands.
+## Step 2 — Create Your Supabase Project
 
-### 3. Configure the Application
+1. Open [Supabase](https://supabase.com/).
+2. Create a new project.
+3. Open the project's API settings.
+4. Copy the Project URL.
+5. Copy the public publishable key, or the legacy anon key if that is what your project provides.
 
-Configure the environment variables and service settings required by the actual source code.
+### Configure the Frontend
 
-Keep private credentials in local environment files or secure deployment settings. Never commit secrets to GitHub.
+Open:
 
-### 4. Run the Application
+`frontend/supabase-config.js`
 
-Follow the setup instructions provided for the current project.
+Replace the placeholder values with your own:
 
-For a static frontend, use a local development server to preview the HTML, CSS, and JavaScript files. If a backend is required, configure and start it separately.
+```javascript
+window.CLOUD_DRIVE_SUPABASE = {
+  url: "https://YOUR-PROJECT.supabase.co",
+  anonKey: "YOUR_SUPABASE_PUBLISHABLE_KEY"
+};
+```
 
-> Exact commands and environment variable names must match the implementation in the repository.
+Use your own Project URL and publishable/anon key.
 
-## ☁️ AWS S3 Setup
+The frontend key is public configuration. **Never place an AWS secret access key or Supabase service-role/secret key in this file.**
 
-To enable real file storage using Amazon S3:
+### Configure Supabase Authentication
 
-1. Sign in to the AWS Management Console.
-2. Create an S3 bucket in your preferred AWS Region.
-3. Keep the bucket private by default.
-4. Configure an IAM role or appropriate credentials with least-privilege permissions.
-5. Configure the backend or authorized storage integration to access the bucket.
-6. Test the supported file operations using non-sensitive sample files.
+In the Supabase dashboard:
 
-### 🔐 Security Best Practices
+1. Enable the Email authentication provider.
+2. Choose your email confirmation settings.
+3. Configure the site's URL and allowed redirect URLs.
+4. Enable and configure Google OAuth if you want Google sign-in.
 
-- Never place AWS secret access keys in frontend JavaScript.
-- Never commit `.env` files, passwords, tokens, or private credentials.
-- Avoid granting public access to the S3 bucket.
-- Use least-privilege IAM permissions.
-- Validate upload requests and restrict file sizes where appropriate.
-- Use server-side authorization or appropriately scoped presigned URLs.
-- Do not assume a file is securely stored until the upload has been verified in S3.
+For local development, the frontend may run on port `3000` or `3002`. Add the matching local URLs to Supabase Authentication → URL Configuration.
 
-## 🔒 Authentication
+Examples:
 
-Authentication must be configured using the mechanism supported by the current implementation.
+```text
+http://localhost:3000/**
+http://127.0.0.1:3000/**
+http://localhost:3002/**
+http://127.0.0.1:3002/**
+```
 
-A frontend-only login form does not provide secure shared user accounts. A public application needs a trusted authentication provider or a properly implemented backend with secure session handling and password storage.
+Use the exact origin and redirect URL required by your frontend setup.
 
-If authentication is not enabled in the live demo, treat it as a UI preview rather than a secure personal storage service.
+## Step 3 — Create Your AWS S3 Bucket
 
-## 🧪 Testing Checklist
+1. Sign in to the [AWS Management Console](https://console.aws.amazon.com/).
+2. Open Amazon S3.
+3. Create a bucket with a globally unique name.
+4. Select the AWS Region you want to use.
+5. Keep Block Public Access enabled.
+6. Create an IAM identity with only the permissions required by this application.
 
-Before describing the project as fully functional, verify the following:
+Do not make your bucket public to get uploads or downloads working.
 
-- [ ] Dashboard opens correctly.
-- [ ] Navigation and file categories work.
-- [ ] File upload completes successfully.
-- [ ] Uploaded files appear in the intended S3 bucket.
-- [ ] File download works.
-- [ ] File deletion works, if implemented.
-- [ ] Credentials are not exposed in frontend code.
-- [ ] The application handles errors appropriately.
-- [ ] The README setup instructions work on a clean environment.
+### Configure AWS Credentials
 
-## 🗺️ Future Improvements
+For local development, use credentials belonging to an appropriately restricted IAM identity. Do not use your AWS root account credentials.
 
-- Secure user authentication
-- User-specific file access controls
-- File search, filtering, and sorting
-- Storage usage based on actual S3 data
-- Controlled file-sharing links
-- Upload progress and improved error handling
-- Additional cloud deployment and security documentation
+The backend needs to know:
 
-## 🎯 Learning Objectives
+- AWS Region
+- S3 bucket name
+- AWS access key ID
+- AWS secret access key
 
-This project provides an opportunity to learn about:
+**Important:** `S3_BUCKET` expects the bucket name, not a full URL. Do not enter an `https://...` or `s3://...` URL in that field.
 
-- Frontend web development
-- Cloud storage concepts
-- Amazon S3 integration
-- IAM permissions and secure configuration
-- Frontend deployment with Vercel
-- Git and GitHub workflows
-- Technical documentation
+## Step 4 — Configure Backend Environment Variables
+
+Open the backend folder:
+
+```bash
+cd backend
+```
+
+Create your local `.env` file from the example.
+
+Open `backend/.env` and replace the placeholder values:
+
+```dotenv
+PORT=3001
+
+AWS_REGION=ap-south-1
+S3_BUCKET=your-private-bucket-name
+AWS_ACCESS_KEY_ID=your-iam-access-key-id
+AWS_SECRET_ACCESS_KEY=your-iam-secret-access-key
+
+S3_PREFIX=cloud-drive
+
+ALLOWED_ORIGIN=http://127.0.0.1:3000,http://localhost:3000,http://127.0.0.1:3002,http://localhost:3002
+
+MAX_FILE_BYTES=104857600
+
+SUPABASE_URL=https://YOUR-PROJECT.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=your-server-side-supabase-service-role-or-secret-key
+```
+
+### Environment Variable Reference
+
+| Variable | Purpose |
+|---|---|
+| `PORT` | Port on which the backend runs |
+| `AWS_REGION` | Region where your S3 bucket exists |
+| `S3_BUCKET` | Name of your private S3 bucket |
+| `AWS_ACCESS_KEY_ID` | IAM access key ID for backend AWS access |
+| `AWS_SECRET_ACCESS_KEY` | Private IAM secret access key |
+| `S3_PREFIX` | Root prefix used to organize application files |
+| `ALLOWED_ORIGIN` | Frontend origins permitted by backend CORS |
+| `MAX_FILE_BYTES` | Maximum accepted file size in bytes |
+| `SUPABASE_URL` | Supabase Project URL used by the backend |
+| `SUPABASE_SERVICE_ROLE_KEY` | Server-side key used to verify user sessions |
+
+The example file uses `104857600` bytes, which is 100 MiB.
+
+
+## Step 5 — Install and Start the Backend
+
+Make sure your terminal is inside the `backend` folder.
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development API:
+
+```bash
+npm run dev
+```
+
+The backend listens on port `3001` by default.
+
+### Check the Backend
+
+Open this URL in your browser:
+
+[http://localhost:3001/api/health](http://localhost:3001/api/health)
+
+A successful response looks like:
+
+```json
+{
+  "status": "ok",
+  "service": "cloud-drive-api"
+}
+```
+
+This checks whether the API is responding. It does not confirm that authentication or S3 storage is fully configured.
+
+## Step 7 — Run the Frontend
+
+1. Open the project in VS Code.
+2. Open the `frontend` folder.
+3. Start the Live Server extension from `frontend/index.html`.
+4. Use port `3000` or `3002` so the default local CORS configuration matches.
+5. Register or sign in through the login page.
+
+Do not open `dashboard.html` directly to sign in. The dashboard checks for an authenticated Supabase session.
+
+### Configure the Local API URL
+
+Open:
+
+`frontend/app-config.js`
+
+For local development, use:
+
+```javascript
+window.CLOUD_DRIVE_APP_CONFIG = Object.freeze({
+  apiBaseUrl: "http://localhost:3001",
+  readmeUrl: "./README.md"
+});
+```
+
+The frontend must point to the API that is actually running. If you change the backend port, update the API URL accordingly.
+
+**You should now have the frontend and backend running in separate terminals.**
+
+---
+
+# ☁️ AWS Permissions
+
+The backend requires permissions appropriate to the operations implemented by the application.
+
+The IAM policy should allow the necessary bucket-level and object-level actions, including:
+
+- `s3:ListBucket` — List application objects in the bucket.
+- `s3:GetObject` — Read or download objects.
+- `s3:PutObject` — Upload new objects and write copied objects.
+- `s3:DeleteObject` — Delete objects.
+
+Scope bucket permissions to your own bucket and object permissions to the application's S3 prefix wherever possible.
+
+The application organizes objects under a per-user prefix similar to:
+
+```text
+cloud-drive/
+└── users/
+    └── <SUPABASE_USER_ID>/
+        └── <UUID>-<filename>
+```
+
+The backend derives the authenticated user's ID from the verified session instead of trusting a user ID supplied by the browser.
+
+---
 
 ## 👨‍💻 Developer
 
@@ -220,12 +346,6 @@ This project provides an opportunity to learn about:
 
 ---
 
-## 📄 License
-
-Choose and add an appropriate open-source license before distributing the project. Until a license is added, the repository should not be assumed to grant others permission to reuse the code.
-
----
-
 <p align="center">
-  Built as a learning project exploring web development and AWS cloud storage.
+  Built to explore web development, authentication, and secure cloud file storage with AWS.
 </p>
