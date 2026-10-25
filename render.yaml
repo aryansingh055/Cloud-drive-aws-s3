@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: cloud-drive-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: AWS_REGION
+        sync: false
+      - key: S3_BUCKET
+        sync: false
+      - key: AWS_ACCESS_KEY_ID
+        sync: false
+      - key: AWS_SECRET_ACCESS_KEY
+        sync: false
+      - key: S3_PREFIX
+        value: cloud-drive
+      - key: ALLOWED_ORIGIN
+        sync: false
+      - key: MAX_FILE_BYTES
+        value: "104857600"
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
